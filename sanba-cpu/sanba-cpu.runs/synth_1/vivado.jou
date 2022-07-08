@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2021.2.1 (64-bit)
+# SW Build 3414424 on Sun Dec 19 10:57:22 MST 2021
+# IP Build 3405791 on Sun Dec 19 15:54:35 MST 2021
+# Start of session at: Sat Jul  9 00:10:09 2022
+# Process ID: 11836
+# Current directory: D:/src/sanba-cpu/sanba-cpu/sanba-cpu.runs/synth_1
+# Command line: vivado.exe -log SanbaCPU.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source SanbaCPU.tcl
+# Log file: D:/src/sanba-cpu/sanba-cpu/sanba-cpu.runs/synth_1/SanbaCPU.vds
+# Journal file: D:/src/sanba-cpu/sanba-cpu/sanba-cpu.runs/synth_1\vivado.jou
+# Running On: Saturn, OS: Windows, CPU Frequency: 3600 MHz, CPU Physical cores: 4, Host memory: 25696 MB
+#-----------------------------------------------------------
+source SanbaCPU.tcl -notrace
