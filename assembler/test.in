@@ -1,0 +1,7 @@
+procedure print:
+    .ciao:
+    nop
+    jp ciaos
+
+main:
+    nop

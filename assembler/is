@@ -1,0 +1,33 @@
+4
+REG     2
+BYTE    8
+ADDR    16
+LABEL   16
+27
+0   nop
+1   ld      REG ADDR
+2   ldi     REG BYTE
+3   st      REG ADDR
+4   add     REG
+5   addi    REG BYTE
+6   sub     REG
+7   subi    REG BYTE
+8   and     REG
+9   andi    REG BYTE
+10  or      REG
+11  ori     REG BYTE
+12  not     REG
+13  xor     REG
+14  xori    REG BYTE
+15  sll     REG
+16  srl     REG
+17  cmp     REG
+18  jp      LABEL
+19  call    LABEL
+20  ret
+21  jpc     LABEL
+22  jpnc    LABEL
+23  jpz     LABEL
+24  jpnz    LABEL
+25  push    REG
+26  pop     REG
