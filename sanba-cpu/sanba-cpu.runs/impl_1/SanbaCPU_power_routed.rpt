@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2021.2.1 (win64) Build 3414424 Sun Dec 19 10:57:22 MST 2021
-| Date             : Sat Jul  9 00:11:52 2022
+| Date             : Sat Jul  9 21:31:45 2022
 | Host             : Saturn running 64-bit major release  (build 9200)
 | Command          : report_power -file SanbaCPU_power_routed.rpt -pb SanbaCPU_power_summary_routed.pb -rpx SanbaCPU_power_routed.rpx
 | Design           : SanbaCPU
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 2.196        |
+| Total On-Chip Power (W)  | 1.134        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 2.091        |
-| Device Static (W)        | 0.105        |
+| Dynamic (W)              | 1.033        |
+| Device Static (W)        | 0.101        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 75.0         |
-| Junction Temperature (C) | 35.0         |
+| Max Ambient (C)          | 79.8         |
+| Junction Temperature (C) | 30.2         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -49,19 +49,22 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+----------------+-----------+----------+-----------+-----------------+
-| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
-+----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.120 |       74 |       --- |             --- |
-|   LUT as Logic |     0.099 |       28 |     63400 |            0.04 |
-|   BUFG         |     0.012 |        2 |        32 |            6.25 |
-|   Register     |     0.009 |       32 |    126800 |            0.03 |
-|   Others       |     0.000 |        3 |       --- |             --- |
-| Signals        |     0.079 |       53 |       --- |             --- |
-| I/O            |     1.892 |       15 |       210 |            7.14 |
-| Static Power   |     0.105 |          |           |                 |
-| Total          |     2.196 |          |           |                 |
-+----------------+-----------+----------+-----------+-----------------+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Slice Logic              |     0.249 |      237 |       --- |             --- |
+|   LUT as Logic           |     0.179 |       86 |     63400 |            0.14 |
+|   BUFG                   |     0.052 |        2 |        32 |            6.25 |
+|   Register               |     0.018 |       94 |    126800 |            0.07 |
+|   CARRY4                 |    <0.001 |        2 |     15850 |            0.01 |
+|   F7/F8 Muxes            |    <0.001 |        6 |     63400 |           <0.01 |
+|   Others                 |     0.000 |        6 |       --- |             --- |
+|   LUT as Distributed RAM |     0.000 |       12 |     19000 |            0.06 |
+| Signals                  |     0.215 |      149 |       --- |             --- |
+| I/O                      |     0.569 |       15 |       210 |            7.14 |
+| Static Power             |     0.101 |          |           |                 |
+| Total                    |     1.134 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary
@@ -70,9 +73,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.225 |       0.203 |      0.022 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.088 |       0.069 |      0.019 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.538 |       0.534 |      0.004 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.486 |       0.468 |      0.018 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.039 |       0.021 |      0.018 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.164 |       0.160 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -134,11 +137,12 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+----------+-----------+
-| Name     | Power (W) |
-+----------+-----------+
-| SanbaCPU |     2.091 |
-|   vga    |     0.187 |
-+----------+-----------+
++--------------+-----------+
+| Name         | Power (W) |
++--------------+-----------+
+| SanbaCPU     |     1.033 |
+|   vu         |     0.358 |
+|     vga_ctrl |     0.338 |
++--------------+-----------+
 
 
