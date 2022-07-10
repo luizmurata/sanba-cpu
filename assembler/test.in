@@ -1,7 +1,11 @@
-procedure print:
-    .ciao:
-    nop
-    jp ciaos
+drawpx:
+  ldi a 0xff
+  ldi x 0x0f
+.loop:
+  stx 0xfc00
+  dec x
+  jnz .loop
+  ret
 
 main:
-    nop
+    call drawpx

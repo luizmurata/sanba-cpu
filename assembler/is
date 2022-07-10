@@ -1,13 +1,14 @@
-4
-REG     2
-BYTE    8
-ADDR    16
-LABEL   16
-27
+5
+REG         2
+BYTE        8
+ADDRESS     16
+LABEL       16
+PROCEDURE   16
+32
 0   nop
-1   ld      REG ADDR
+1   ld      REG ADDRESS
 2   ldi     REG BYTE
-3   st      REG ADDR
+3   st      REG ADDRESS
 4   add     REG
 5   addi    REG BYTE
 6   sub     REG
@@ -23,11 +24,16 @@ LABEL   16
 16  srl     REG
 17  cmp     REG
 18  jp      LABEL
-19  call    LABEL
+19  call    PROCEDURE
 20  ret
 21  jpc     LABEL
-22  jpnc    LABEL
+22  jnc    LABEL
 23  jpz     LABEL
-24  jpnz    LABEL
+24  jnz    LABEL
 25  push    REG
 26  pop     REG
+27  bit     BYTE
+28  ldx     ADDRESS
+29  stx     ADDRESS
+30  inc     REG
+31  dec     REG
