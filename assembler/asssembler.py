@@ -45,8 +45,7 @@ class Procedure:
     @staticmethod
     def size(code):
         total = 0
-        for l in code:
-            tokens = l.split()
+        for tokens in code:
             istr = tokens[0].lower()
             if istr.startswith("."):
                 continue
@@ -75,16 +74,24 @@ class Procedure:
                     opcode = OPCODES[istr]
                 except:
                     raise Exception("Istruction not valid")
-                    
+
                 assert(len(tokens) == len(opcode.params))
 
-                self.code.append(line)
+                if len(tokens) > 1:
+                    assert(tokens[0].endswith(","))
+                    tokens[0] = tokens[0].rstrip(",")
+                elif len(tokens) == 1:
+                    assert(not tokens[0].endswith(","))
+
                 address += opcode.size()
+                
+                tokens.insert(0, istr)
+                self.code.append(tokens)
+            
 
     def assemble(self):
         binary = []
-        for line in self.code:
-            tokens = line.split(" ")
+        for tokens in self.code:
             istr = tokens.pop(0).lower()
 
             opcode = OPCODES[istr]
@@ -249,18 +256,19 @@ def create_st(procedures_dict):
         SYMBOL_TABLE['PROCEDURE'][name] = address
         address += size
 
-procedures = parse()
-create_st(procedures)
+if __name__ == "__main__":
+    procedures = parse()
+    create_st(procedures)
 
-output = ""
-for p in procedures:
-    proc = procedures[p]
-    proc.assemble()
-    output += ''.join(proc.binary)
+    output = ""
+    for p in procedures:
+        proc = procedures[p]
+        proc.assemble()
+        output += ''.join(proc.binary)
 
-with open("test.out", "w") as fout:
-    for pos in range(int(len(output) / 8)):
-        s = output[pos * 8 : (pos + 1) * 8]
-        r = hex(int(s, 2)).lstrip("0x").rjust(2, '0')
-        fout.write(r + "\n")
-    fout.write("00\n" * int((2 ** 16 - len(output)) / 8))
+    with open("test.out", "w") as fout:
+        for pos in range(int(len(output) / 8)):
+            s = output[pos * 8 : (pos + 1) * 8]
+            r = hex(int(s, 2)).lstrip("0x").rjust(2, '0')
+            fout.write(r + "\n")
+        fout.write("00\n" * int((2 ** 16 - len(output)) / 8))
