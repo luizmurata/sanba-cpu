@@ -90,8 +90,10 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
+  D:/src/sanba-cpu/sanba-cpu/sanba-cpu.srcs/sources_1/new/cpu.vhd
   D:/src/sanba-cpu/sanba-cpu/sanba-cpu.srcs/sources_1/new/vga.vhd
   D:/src/sanba-cpu/sanba-cpu/sanba-cpu.srcs/sources_1/new/videounit.vhd
+  D:/src/sanba-cpu/sanba-cpu/sanba-cpu.srcs/sources_1/new/memory.vhd
   D:/src/sanba-cpu/sanba-cpu/sanba-cpu.srcs/sources_1/new/sanbacpu.vhd
 }
 OPTRACE "Adding files" END { }

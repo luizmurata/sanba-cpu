@@ -89,7 +89,7 @@ begin
 				tmp := std_logic_vector(to_unsigned(r_col, 8));
 				line_addr(3 downto 0) := tmp(6 downto 3);
 				off_c := tmp(2 downto 0);
-				cell := video_mem(conv_integer(line_addr))(conv_integer(off_c));
+				cell := video_mem(conv_integer(line_addr))(8-conv_integer(off_c));
 				
 				if cell = '1' then
 					r_r <= x"1";
