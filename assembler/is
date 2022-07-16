@@ -6,34 +6,34 @@ LABEL       16
 PROCEDURE   16
 32
 0   nop
-1   ld      REG ADDRESS
-2   ldi     REG BYTE
-3   st      REG ADDRESS
-4   add     REG
-5   addi    REG BYTE
-6   sub     REG
-7   subi    REG BYTE
+1   ret
+2   inc     REG
+3   dec     REG
+4   push    REG
+5   pop     REG
+6   add     REG
+7   sub     REG
 8   and     REG
-9   andi    REG BYTE
-10  or      REG
-11  ori     REG BYTE
-12  not     REG
-13  xor     REG
-14  xori    REG BYTE
-15  sll     REG
-16  srl     REG
-17  cmp     REG
-18  jp      LABEL
-19  call    PROCEDURE
-20  ret
-21  jpc     LABEL
-22  jnc    LABEL
-23  jpz     LABEL
-24  jnz    LABEL
-25  push    REG
-26  pop     REG
-27  bit     BYTE
-28  ldx     ADDRESS
-29  stx     ADDRESS
-30  inc     REG
-31  dec     REG
+9   not     REG
+10  xor     REG
+11  or      REG
+12  lsl     REG
+13  lsr     REG
+14  cmp     REG
+32  bit     BYTE
+33  ldi     REG BYTE
+34  addi    REG BYTE
+35  subi    REG BYTE
+36  andi    REG BYTE
+37  ori     REG BYTE
+38  xori    REG BYTE
+48  ld      REG ADDRESS
+49  st      REG ADDRESS
+50  jp      LABEL
+51  jpc     LABEL
+52  jnc     LABEL
+53  jpz     LABEL
+54  jnz     LABEL
+55  call    PROCEDURE
+56  ldx     ADDRESS
+57  stx     ADDRESS
