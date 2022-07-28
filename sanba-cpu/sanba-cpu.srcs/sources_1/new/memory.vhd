@@ -27,22 +27,22 @@ architecture rtl of Memory is
 	type t_mem is array (0 to (65536-1024)) of std_logic_vector(7 downto 0);
 	
      impure function ReadMemFile(FileName : STRING) return t_mem is
-        file FileHandle         : TEXT open READ_MODE is FileName;
-        variable CurrentLine    : LINE;
-        variable TempWord       : std_logic_vector(7 downto 0);
+        --file FileHandle         : TEXT open READ_MODE is FileName;
+        --variable CurrentLine    : LINE;
+        --variable TempWord       : std_logic_vector(7 downto 0);
         variable Result         : t_mem;
     begin
-        for i in 0 to 15 loop
-            exit when endfile(FileHandle);
-            readLine(FileHandle, CurrentLine);
-            hread(CurrentLine, TempWord);
-            Result(i) := TempWord;
+        for i in 0 to (65536-1024) loop
+            --exit when endfile(FileHandle);
+            --readLine(FileHandle, CurrentLine);
+            --hread(CurrentLine, TempWord);
+            Result(i) := x"AA";
         end loop;
        
         return Result;
     end function; 
     
-    signal r_mem : t_mem := ReadMemFile("test.txt");
+    signal r_mem : t_mem := ReadMemFile("rams_init_file.data");
 	
     signal r_we : std_logic;
     signal r_waddr  : std_logic_vector(9 downto 0) := "0000000000";
@@ -65,7 +65,7 @@ begin
         o_vga_vsync => o_vga_vsync
     );
 
-	process (i_clk) is
+	process (i_clk,i_we) is
 	begin
 		if rising_edge(i_clk) and i_we = '1' then
             if i_waddr >= x"fc00" then

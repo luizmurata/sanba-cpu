@@ -21,7 +21,7 @@ architecture rtl of CPU is
     );
     signal r_state : t_state := start;
     signal r_next_state : t_state;
-    signal addr : std_logic_vector(7 downto 0) := x"00";
+    signal addr : std_logic_vector(9 downto 0) := "0000000000";
     signal data : std_logic_vector(7 downto 0) := x"00";
 begin
 
@@ -32,22 +32,36 @@ begin
         end if;
     end process;
     
-    process (r_state) is
+    process (r_state,i_data,data,addr) is
     begin
         case r_state is
             when start =>
+                o_we <= '0';
+                o_raddr <= (others => '0');
+                o_waddr <= (others => '0');
+                o_data <= x"00";
                 r_next_state <= fetch;
             when fetch =>
-                o_raddr(7 downto 0) <= x"00";
+                o_raddr(15 downto 10) <= "000000";
+                o_raddr(9 downto 0) <= addr;
+                o_waddr <= (others => '0');
                 o_we <= '0';
+                o_data <= x"00";
                 data <= i_data;
                 r_next_state <= send;
             when send =>
-                o_waddr <= x"fc00";
+                o_raddr <= (others => '0');
+                o_waddr(15 downto 10) <= "111111";
+                o_waddr(9 downto 0) <= addr;
                 o_we <= '1';
                 o_data <= data;
-                r_next_state <= stop;
+                addr <= addr + 1;
+                r_next_state <= fetch;
             when stop =>
+                o_we <= '0';
+                o_raddr <= (others => '0');
+                o_waddr <= (others => '0');
+                o_data <= x"00";
                 r_next_state <= stop;
         end case;
     end process;

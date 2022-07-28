@@ -29,7 +29,7 @@ architecture rtl of VideoUnit is
 	
 	-- video memory
 	type t_mem is array (0 to 1023) of std_logic_vector(7 downto 0);
-	signal video_mem : t_mem;
+	signal video_mem : t_mem := (others => (others => '0'));
 	
 	-- counters for scaling
 	signal r_hcount  : natural range 0 to 4 := 0;
@@ -62,20 +62,20 @@ begin
 		o_vga_vsync => o_vga_vsync
 	);
 	
-	mem_write : process (i_clk) is
+	mem_write : process (i_clk, i_we) is
 	begin
 		if rising_edge(i_clk) and (i_we = '1') then
 		  video_mem(conv_integer(i_waddr)) <= i_data;
 		end if;
 	end process;
 	
-	draw : process (i_clk) is
+	draw : process (i_clk, r_draw_en) is
 		variable current_y  : natural range 0 to 319;
 		variable current_x  : natural range 0 to 639;
 		variable line_addr  : std_logic_vector(9 downto 0);
 		variable off_c      : std_logic_vector(2 downto 0);
 		variable cell       : std_logic;
-		variable tmp        : std_logic_vector(7 downto 0);
+		variable tmp        : std_logic_vector(6 downto 0);
 	begin
 		if rising_edge(i_clk) and (r_draw_en = '1') then
 			if (r_y < V_START) or (r_y > (V_START+319)) then
@@ -86,10 +86,10 @@ begin
 				current_y := r_y - V_START;
 				current_x := r_x;
 				line_addr(9 downto 4) := std_logic_vector(to_unsigned(r_row, 6));
-				tmp := std_logic_vector(to_unsigned(r_col, 8));
+				tmp := std_logic_vector(to_unsigned(r_col, 7));
 				line_addr(3 downto 0) := tmp(6 downto 3);
 				off_c := tmp(2 downto 0);
-				cell := video_mem(conv_integer(line_addr))(8-conv_integer(off_c));
+				cell := video_mem(conv_integer(line_addr))(conv_integer(off_c));
 				
 				if cell = '1' then
 					r_r <= x"1";

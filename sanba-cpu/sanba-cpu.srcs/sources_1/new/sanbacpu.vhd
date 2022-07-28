@@ -20,8 +20,6 @@ architecture rtl of SanbaCPU is
     signal r_raddr  : std_logic_vector(15 downto 0) := x"0000";
     signal r_i_data : std_logic_vector(7 downto 0) := x"00";
     signal r_o_data : std_logic_vector(7 downto 0) := x"00";
-    
-    signal once : natural := 0;
 begin
     memory : entity work.Memory port map (
         i_clk => clk,

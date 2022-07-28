@@ -7,4 +7,4 @@ ghdl -a --std=08 -fsynopsys ./sanba-cpu/sanba-cpu\.srcs/sources_1/new/memory.vhd
 ghdl -a --std=08 -fsynopsys ./sanba-cpu/sanba-cpu\.srcs/sources_1/new/cpu.vhd
 ghdl -a --std=08 -fsynopsys ./sanba-cpu/sanba-cpu\.srcs/sources_1/new/cpu_tb.vhd
 ghdl -a --std=08 -fsynopsys ./sanba-cpu/sanba-cpu\.srcs/sources_1/new/sanbacpu.vhd
-ghdl -e -fsynopsys $1 && ghdl -r -fsynopsys $1
+ghdl -e --std=08 -fsynopsys $1 && ghdl -r --std=08 -fsynopsys $1 --vcd=out.vcd
