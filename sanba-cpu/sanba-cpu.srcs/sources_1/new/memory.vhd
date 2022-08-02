@@ -27,22 +27,29 @@ architecture rtl of Memory is
 	type t_mem is array (0 to (65536-1024)) of std_logic_vector(7 downto 0);
 	
      impure function ReadMemFile(FileName : STRING) return t_mem is
-        --file FileHandle         : TEXT open READ_MODE is FileName;
-        --variable CurrentLine    : LINE;
-        --variable TempWord       : std_logic_vector(7 downto 0);
+        file FileHandle         : TEXT open READ_MODE is FileName;
+        variable CurrentLine    : LINE;
+        variable TempWord       : std_logic_vector(7 downto 0);
         variable Result         : t_mem;
+        variable size           : integer;
     begin
         for i in 0 to (65536-1024) loop
-            --exit when endfile(FileHandle);
-            --readLine(FileHandle, CurrentLine);
-            --hread(CurrentLine, TempWord);
-            Result(i) := x"AA";
+            exit when endfile(FileHandle);
+            readLine(FileHandle, CurrentLine);
+            hread(CurrentLine, TempWord);
+            Result(i) := TempWord;
+            size := i;
+        end loop;
+        
+        -- fill the rest with zeros
+        for i in size to (65536-1024) loop
+            Result(i) := x"00";
         end loop;
        
         return Result;
     end function; 
     
-    signal r_mem : t_mem := ReadMemFile("rams_init_file.data");
+    signal r_mem : t_mem := ReadMemFile("test.txt");
 	
     signal r_we : std_logic;
     signal r_waddr  : std_logic_vector(9 downto 0) := "0000000000";

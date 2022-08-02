@@ -23,6 +23,7 @@ architecture rtl of CPU is
     signal r_next_state : t_state;
     signal addr : std_logic_vector(9 downto 0) := "0000000000";
     signal data : std_logic_vector(7 downto 0) := x"00";
+
 begin
 
     process (i_clk) is
